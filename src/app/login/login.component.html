@@ -1,0 +1,58 @@
+<div class="container">
+<div class="row">
+
+ 	<div class="col-md-3"></div>
+
+
+    <div class="col-md-6" style="margin-top: 20px;">
+
+
+    					<div class="panel panel-primary">
+      			<div class="panel-heading"><span class="glyphicon glyphicon-log-in" style="margin-right: 5px;"></span>LogIn
+      			</div>
+      			<div class="panel-body">
+					<div class="row">
+						<div class="col-md-4">
+							<label class="loginlabel">USERNAME :</label>
+						</div>
+						<div class="col-md-8">
+							<a data-toggle="tooltip" data-placement="left" title="Enter Username"><input type="text" name="txtpassword" class="form-control logintextfield" [(ngModel)]="username"></a>
+						</div>
+
+					</div>
+
+					<div class="row">
+						<div class="col-md-4">
+							<label class="loginlabel">PASSWORD :</label>
+						</div>
+						<div class="col-md-8">
+							<a data-toggle="tooltip" data-placement="left" title="Enter Password"><input type="PASSWORD" name="txtpassword" class="form-control logintextfield" [(ngModel)]="password"></a>
+						</div>
+
+					</div>
+
+					<div class="row">
+						<div class="col-md-2"></div>
+						<div class="col-md-4">
+							<!--button type="button" id="btnlogin" class="btn btn-primary form-control loginbutton" onclick="location.href = '/dashboard';">LOG-IN</button-->
+
+								<button type="button" id="btnlogin" class="btn btn-primary form-control loginbutton" (click)="validateAndRedirect()">LOG-IN</button>
+						</div>
+						<div class="col-md-4">
+							<button type="button" class="btn btn-primary form-control loginbutton">CANCEL</button>
+						</div>
+						<div class="col-md-2"></div>
+					</div>
+
+				</div>
+
+
+
+
+	</div>
+
+
+	<div class="col-md-3"></div>
+</div>
+
+</div>

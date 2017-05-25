@@ -1,0 +1,244 @@
+
+
+      <!--BTN TO CREATE NEW EMPLOYEE : START-->
+      <h1 class="page-header" xmlns="http://www.w3.org/1999/html">
+        Employee List
+        <button type="button"
+                style="margin-left: 50%; position: absolute; width: auto"
+                id="btnnewemp"
+                class="btn btn-primary form-control loginbutton"
+                data-toggle="modal"
+                data-target="#addNew">
+          NEW EMPLOYEE
+        </button>
+      </h1>
+      <!--BTN TO CREATE NEW EMPLOYEE : END-->
+
+  <!-- main table -->
+      <table class="table table-hover table-striped table-sortable" [mfData]="employees" #mf="mfDataTable" [mfRowsOnPage]="10" (mfSelectedEntities)="setSelectedEntities($event)">
+        <thead>
+        <tr>
+          <th><mfDefaultSorter by="EMPLOYEE_NAME">NAME</mfDefaultSorter></th>
+          <th><mfDefaultSorter by="EMPLOYEE_ID">ID</mfDefaultSorter></th>
+          <th><mfDefaultSorter by="COUNTRY">COUNTRY</mfDefaultSorter></th>
+          <th><mfDefaultSorter by="GENDER">GENDER</mfDefaultSorter></th>
+          <th style="color: #5c5c5c">CONTACT</th>
+          <th style="color: #5c5c5c">ACTION</th>
+        </tr>
+        </thead>
+      <tbody>
+        <tr *ngFor="let employee of mf.data; let ndx = index">
+          <td>{{employee.EMPLOYEE_NAME}}</td>
+          <td>{{employee.EMPLOYEE_ID}}</td>
+          <td>{{employee.COUNTRY}}</td>
+          <td>{{employee.GENDER}}</td>
+          <td>{{employee.PRIMARY_CONTACT}}</td>
+          <td>
+            <button type="button"
+                    id= "details"
+                    class="glyphicon glyphicon-new-window"
+                    (click)="detailview(employee, ndx)"
+                    data-toggle="modal"
+                    data-target="#viewDetails">
+            </button>
+            <button id = "btnedit"
+                    class="glyphicon glyphicon-edit"
+                    (click)="detailview(employee, ndx)"
+                    data-toggle="modal"
+                    data-target="#edit">
+
+            </button>
+            <button id="delete" class="glyphicon glyphicon-remove-circle"
+                    (click)="deleteemployee(ndx)"></button>
+          </td>
+        </tr>
+        </tbody>
+        <tfoot>
+        <tr>
+          <td colspan="4">
+            <mfBootstrapPaginator></mfBootstrapPaginator>
+          </td>
+        </tr>
+        </tfoot>
+
+      </table>
+
+
+
+          <!-- Modal add new -->
+          <div class="modal fade" id="addNew" role="dialog">
+            <div class="modal-dialog">
+
+              <!-- Modal content-->
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                  <h4 class="modal-title">New Employee</h4>
+                </div>
+                <div class="modal-body">
+
+                  <label class="loginlabel">TITLE :</label> <select class="form-control" id="sel1" [(ngModel)]="employeerecord.TITLE">
+                  <option value="" selected disabled>Select Title</option>
+                  <option>Mr. </option>
+                  <option>Ms. </option>
+                  <option>Mrs.</option>
+                  <option>Dr.</option>
+                  <option>Esq.</option>
+                  <option>Messrs.</option>
+                  <option>Prof.</option>
+                  <option>Sr.</option>
+                  <option>Jr.</option>
+                  <option>St.</option>
+                </select>
+
+                 <br> <label class="loginlabel">NAME :</label> <input type="text" name="txtpassword" class="form-control logintextfield" [(ngModel)]="employeerecord.EMPLOYEE_NAME">
+
+                  <br><label class="loginlabel">GENDER :</label> <select class="form-control" id="sel2" [(ngModel)]="employeerecord.GENDER">
+                  <option value="" selected disabled>Select Gender</option>
+                    <option>Male</option>
+                    <option>Female</option>
+
+                  </select>
+                  <br> <label class="loginlabel">COUNTRY :</label> <select class="form-control" id="se52" [(ngModel)]="employeerecord.COUNTRY">
+                  <option value="" selected disabled>Select Country</option>
+                  <option>Armenia</option>
+                  <option>Bangladesh</option>
+                  <option>Bhutan</option>
+                  <option>China</option>
+                  <option>Georgia</option>
+                  <option>India</option>
+                  <option>Indonesia</option>
+                  <option>Japan</option>
+                  <option>Malaysia</option>
+                  <option>Nepal</option>
+                  <option>Russia</option>
+
+                </select>
+
+                  <br> <label class="loginlabel">CONTACT NO. :</label> <input type="text" name="txtpassword" class="form-control logintextfield" [(ngModel)]="employeerecord.PRIMARY_CONTACT">
+
+                  <br>
+                  <p style="color: red">*All Fields are required</p>
+                </div>
+                <div class="modal-footer">
+                  <button type="submit" class="btn btn-default" (click)="newEmployee(employeerecord)">Save</button>
+                  <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+          <!-- modal viewDetails -->
+
+      <div class="modal fade" id="viewDetails" role="dialog">
+        <div class="modal-dialog">
+
+          <!-- Modal content-->
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+              <h4 class="modal-title">Details of {{employeerecord.TITLE}} {{employeerecord.EMPLOYEE_NAME}}</h4>
+
+            <br class="modal-body">
+              <label class="loginlabel">ID :</label>{{employeerecord.EMPLOYEE_ID}}
+              <br>
+              <label class="loginlabel">TITLE :</label>{{employeerecord.TITLE}}
+
+              <br> <label class="loginlabel">NAME :</label>{{employeerecord.EMPLOYEE_NAME}}
+              <br><label class="loginlabel">GENDER :</label>{{employeerecord.GENDER}}
+
+
+              <br> <label class="loginlabel">COUNTRY :</label>{{employeerecord.COUNTRY}}
+
+              <br> <label class="loginlabel">CONTACT NO. :</label>{{employeerecord.PRIMARY_CONTACT}}
+              <br>
+
+            </div>
+            <div class="modal-footer">
+
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+          <!-- Modal EDIT / UPDATE -->
+
+      <div class="modal fade" id="edit" role="dialog">
+        <div class="modal-dialog">
+
+          <!-- Modal content-->
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+              <h4 class="modal-title">UPDATE</h4>
+            </div>
+            <div class="modal-body">
+
+              <label class="loginlabel">TITLE :</label>
+              <select class="form-control" id="sel1" [(ngModel)]="employeerecord.TITLE">
+              <option value="" selected disabled>Select Title</option>
+              <option>Mr. </option>
+              <option>Ms. </option>
+              <option>Mrs.</option>
+              <option>Dr.</option>
+              <option>Esq.</option>
+              <option>Messrs.</option>
+              <option>Prof.</option>
+              <option>Sr.</option>
+              <option>Jr.</option>
+              <option>St.</option>
+            </select>
+
+              <br> <label class="loginlabel">NAME :</label> <input type="text"
+                                                                   name="txtpassword" class="form-control logintextfield"
+                                                                   [(ngModel)]="employeerecord.EMPLOYEE_NAME">
+
+              <br><label class="loginlabel">GENDER :</label>
+              <select class="form-control" id="sel2" [(ngModel)]="employeerecord.GENDER">
+              <option value="" selected disabled>Select Gender</option>
+              <option>Male</option>
+              <option>Female</option>
+
+            </select>
+              <br> <label class="loginlabel">COUNTRY :</label>
+              <select class="form-control" id="se52" [(ngModel)]="employeerecord.COUNTRY">
+                  <option value="" selected disabled>Select Country</option>
+                  <option>Armenia</option>
+                  <option>Bangladesh</option>
+                  <option>Bhutan</option>
+                  <option>China</option>
+                  <option>Georgia</option>
+                  <option>India</option>
+                  <option>Indonesia</option>
+                  <option>Japan</option>
+                  <option>Malaysia</option>
+                  <option>Nepal</option>
+                  <option>Russia</option>
+
+              </select>
+
+              <br> <label class="loginlabel">CONTACT NO. :</label>
+              <input type="text" name="txtpassword" class="form-control logintextfield"
+                     [(ngModel)]="employeerecord.PRIMARY_CONTACT">
+
+              <br>
+              <p style="color: red">*All Fields are required</p>
+            </div>
+            <div class="modal-footer">
+              <button type="submit" class="btn btn-default" (click)=" updateemployee(employeerecord)">UPDATE</button>
+              <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+
+
+
+
+
+

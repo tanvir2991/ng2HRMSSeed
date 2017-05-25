@@ -1,0 +1,10 @@
+
+
+.layoutheaderdiv{
+
+ 
+    padding: 25px;
+    margin: 10px;
+ 	background: linear-gradient(-90deg, grey, white);
+ 	box-shadow: 10px 10px;
+}
